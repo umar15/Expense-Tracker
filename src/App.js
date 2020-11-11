@@ -1,5 +1,5 @@
 import "./App.css";
-import ExpenseTracker from "./ExpenseTracker";
+import ExpenseTracker from "./components/ExpenseTracker";
 
 function App() {
 	return (
