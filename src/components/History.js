@@ -1,16 +1,12 @@
-import React from "react";
-
-const transactions = [
-	{ desc: "Salary", amount: 100 },
-	{ desc: "mobile", amount: 40 },
-	{ desc: "others", amount: 10 },
-];
+import React, { useContext } from "react";
+import { initialTransactions } from "../context/TransactionContext";
 
 const History = () => {
+	const transactionContext = useContext(initialTransactions);
 	return (
 		<div className="history">
 			<h4>History</h4>
-			{transactions.map((trans) => {
+			{transactionContext.map((trans) => {
 				return (
 					<li>
 						<spna>{trans.desc}</spna>
