@@ -1,9 +1,5 @@
 import React, { createContext, useReducer } from "react";
 import TransactionReducer from "./TransactionReducer";
-import Balance from "../components/Balance";
-import AddTransaction from "../components/AddTransaction";
-import IncomeExpense from "../components/IncomeExpense";
-import History from "../components/History";
 
 const initialState = {
 	transactions: [],
