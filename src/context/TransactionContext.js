@@ -1,25 +1,18 @@
-import { createContext } from "react";
+import React, { createContext, useReducer } from "react";
 import TransactionReducer from "./TransactionReducer";
+import Balance from "../components/Balance";
+import AddTransaction from "../components/AddTransaction";
+import IncomeExpense from "../components/IncomeExpense";
+import History from "../components/History";
 
-const transactions = [
-	{ desc: "Salary", amount: 100 },
-	{ desc: "mobile", amount: 40 },
-	{ desc: "others", amount: 10 },
-];
+const initialState = {
+	transactions: [],
+};
 
-// Create transaction global context
-export const initialTransactions = createContext(transactions);
+export const transContext = createContext(initialState);
 
-// Provider, which provide all data to other components
-export const transactionProvider = ({ children }) => {
+const TransactionProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(TransactionReducer, initialState);
-
-	function addTransaction(transaction) {
-		dispatch({
-			type: "ADD_TRANSACTION", // dispatch the action to reducer function i.e TransactionReducer
-			payload: transaction, // The content send to action
-		});
-	}
 
 	function deleteTransaction(id) {
 		dispatch({
@@ -28,8 +21,15 @@ export const transactionProvider = ({ children }) => {
 		});
 	}
 
+	function addTransaction(transaction) {
+		dispatch({
+			type: "ADD_TRANSACTION",
+			payload: transaction,
+		});
+	}
+
 	return (
-		<initialTransactions.Provider
+		<transContext.Provider
 			value={{
 				transactions: state.transactions,
 				addTransaction,
@@ -37,6 +37,8 @@ export const transactionProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</initialTransactions.Provider>
+		</transContext.Provider>
 	);
 };
+
+export default TransactionProvider;

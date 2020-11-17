@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
-import { initialTransactions } from "../context/TransactionContext";
+import { transContext } from "../context/TransactionContext";
+import Transaction from "./Transaction";
 
 const History = () => {
-	const transactionContext = useContext(initialTransactions);
+	const { transactions } = useContext(transContext);
+
 	return (
 		<div className="history">
 			<h4>History</h4>
-			{transactionContext.map((trans) => {
-				return (
-					<li>
-						<spna>{trans.desc}</spna>
-						<span>{trans.amount}</span>
-					</li>
-				);
-			})}
+			<ul className="list">
+				{transactions.map((transaction) => (
+					<Transaction key={transaction.id} transaction={transaction} />
+				))}
+			</ul>
 		</div>
 	);
 };
