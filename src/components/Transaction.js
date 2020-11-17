@@ -7,8 +7,8 @@ const Transaction = ({ transaction }) => {
 
 	return (
 		<div>
-			<li className="list">
-				{transaction.description}{" "}
+			<li className={transaction.amount < 0 ? "minus" : "plus"}>
+				{transaction.desc}{" "}
 				<span>
 					{sign}${Math.abs(transaction.amount)}
 				</span>
